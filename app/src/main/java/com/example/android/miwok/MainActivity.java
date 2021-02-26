@@ -15,10 +15,13 @@
  */
 package com.example.android.miwok;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,10 +31,62 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
-    }
 
-    public void openNumbersList(View view) {
-        Intent i = new Intent(this, NumbersActivity.class);
-        startActivity(i);
+        //Find the TextView tag, in this case numbers
+        TextView numbers = (TextView)findViewById(R.id.numbers);
+
+        numbers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //create an explicit intent
+                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
+
+                //Use intent method
+                startActivity(numbersIntent);
+            }
+        });
+
+        //Find the TextView tag, in this case Family members
+        TextView family = (TextView)findViewById(R.id.family);
+
+        family.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //create an explicit intent
+                Intent familyMembersIntent = new Intent(MainActivity.this, FamilyActivity.class);
+
+                //Use intent method
+                startActivity(familyMembersIntent);
+            }
+        });
+
+        //Find the TextView tag, in this case Colors
+        TextView colors = (TextView)findViewById(R.id.colors);
+
+        colors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //create an explicit intent
+                Intent colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
+
+                //Use intent method
+                startActivity(colorsIntent);
+            }
+        });
+
+        //Find the TextView tag, in this case Colors
+        TextView phrases = (TextView)findViewById(R.id.phrases);
+
+        phrases.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //create an explicit intent
+                Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
+
+                //Use intent method
+                startActivity(phrasesIntent);
+            }
+        });
+
     }
 }
