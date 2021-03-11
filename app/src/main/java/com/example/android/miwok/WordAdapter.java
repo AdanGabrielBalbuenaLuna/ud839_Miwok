@@ -42,11 +42,11 @@ public class WordAdapter extends ArrayAdapter<Word> {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Check if the existing view is being reused, otherwise inflate the view
+        // Check if an existing view is being reused, otherwise inflate the view
         View listItemView = convertView;
-        if(listItemView == null) {
+        if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.word_list, parent, false);
+                    R.layout.list_item, parent, false);
         }
 
         // Get the {@link Word} object located at this position in the list
