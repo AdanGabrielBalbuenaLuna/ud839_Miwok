@@ -16,12 +16,20 @@
 package com.example.android.miwok;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
+
+    /** Handles playback of all the sound files */
+    private MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +37,17 @@ public class NumbersActivity extends AppCompatActivity {
         setContentView(R.layout.word_list);
 
         // Create an array of words
-        ArrayList<Word> words = new ArrayList<Word>();
-        words.add(new Word("one", "lutti", R.drawable.number_one));
-        words.add(new Word("two", "otiiko", R.drawable.number_two));
-        words.add(new Word("three", "tolookosu", R.drawable.number_three));
-        words.add(new Word("four", "oyyisa", R.drawable.number_four));
-        words.add(new Word("five", "massokka", R.drawable.number_five));
-        words.add(new Word("six", "temmokka", R.drawable.number_six));
-        words.add(new Word("seven", "kenekaku", R.drawable.number_seven));
-        words.add(new Word("eight", "kawinta", R.drawable.number_eight));
-        words.add(new Word("nine", "wo’e", R.drawable.number_nine));
-        words.add(new Word("ten", "na’aacha", R.drawable.number_ten));
+        final ArrayList<Word> words = new ArrayList<Word>();
+        words.add(new Word("one", "lutti", R.drawable.number_one, R.raw.number_one));
+        words.add(new Word("two", "otiiko", R.drawable.number_two, R.raw.number_two));
+        words.add(new Word("three", "tolookosu", R.drawable.number_three, R.raw.number_three));
+        words.add(new Word("four", "oyyisa", R.drawable.number_four, R.raw.number_four));
+        words.add(new Word("five", "massokka", R.drawable.number_five, R.raw.number_five));
+        words.add(new Word("six", "temmokka", R.drawable.number_six, R.raw.number_six));
+        words.add(new Word("seven", "kenekaku", R.drawable.number_seven, R.raw.number_seven));
+        words.add(new Word("eight", "kawinta", R.drawable.number_eight, R.raw.number_eight));
+        words.add(new Word("nine", "wo’e", R.drawable.number_nine, R.raw.number_nine));
+        words.add(new Word("ten", "na’aacha", R.drawable.number_ten, R.raw.number_ten));
 
         // Create an {@link ArrayAdapter}, whose data source is a list of Strings. The
         // adapter knows how to create layouts for each item in the list, using the
@@ -50,7 +58,7 @@ public class NumbersActivity extends AppCompatActivity {
                 new ArrayAdapter<Word>(this, R.layout.list_item, words);
                 //new ArrayAdapter<Word>(this, android.R.layout.simple_list_item_1, words);*/
         WordAdapter adapter =
-                new WordAdapter(this, words);
+                new WordAdapter(this, words, R.color.category_numbers); //with color
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
@@ -65,5 +73,22 @@ public class NumbersActivity extends AppCompatActivity {
         // 1 argument, which is the {@link ArrayAdapter} with the variable name itemsAdapter.
         listView.setAdapter(adapter);
         //gridView.setAdapter(itemsAdapter);
+
+        // Set a click listener to play the audio when the list item is clicked on
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the {@link Word} object at the given position the user clicked on
+                Word word = words.get(position);
+
+                // Create and setup the {@link MediaPlayer} for the audio resource associated
+                // with the current word
+                mMediaPlayer = MediaPlayer.create(NumbersActivity.this, word.getAudioResourceID());
+
+                // Start the audio file
+                mMediaPlayer.start();
+                Toast.makeText(NumbersActivity.this, "You Started a sound number, ArrayList:position = " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -14,19 +14,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:background="@color/tan_background"
+    android:minHeight="@dimen/list_item_height">
 
     <ImageView
         android:id="@+id/list_item_icon"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"/>
 
     <LinearLayout
+        android:id="@+id/text_container"
         android:layout_width="match_parent"
-        android:layout_height="88dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="16dp">
 
@@ -37,7 +38,8 @@
             android:layout_weight="1"
             tools:text="lutti"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:textAppearanceMedium"
             android:gravity="bottom"/>
 
         <TextView
@@ -46,9 +48,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             tools:text="one"
-
-            android:textSize="18sp"/>
-
+            android:textColor="@android:color/white"
+            android:gravity="top"
+            android:textAppearance="?android:textAppearanceMedium"/>
     </LinearLayout>
 
 </LinearLayout>

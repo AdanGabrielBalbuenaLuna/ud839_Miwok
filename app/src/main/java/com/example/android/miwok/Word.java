@@ -16,6 +16,8 @@ package com.example.android.miwok;
  * limitations under the License.
  */
 
+import android.media.MediaPlayer;
+
 /**
  * {@link Word} represents a vocabulary word that the user wants to learn.
  * It contains a default translation and a Miwok translation for that word.
@@ -34,16 +36,22 @@ public class Word {
     /** Constant value that represents no image was provided for this word */
     private static final int NO_IMAGE_PROVIDED = -1;
 
+    /** Audio resource ID for the word */
+    private int mAudioResourceID;
+
     /**
      * Create a new Word object.
      *
      * @param defaultTranslation is the word in a language that the user is already familiar with
      *                           (such as English)
      * @param miwokTranslation is the word in the Miwok language
+     *
+     * @param audioResourceId is the resource ID for the audio file associated with this word
      */
-    public Word(String defaultTranslation, String miwokTranslation) {
+    public Word(String defaultTranslation, String miwokTranslation, int audioResourceId) {
         mDefaultTranslation = defaultTranslation;
         mMiwokTranslation = miwokTranslation;
+        mAudioResourceID = audioResourceId;
     }
 
     /**
@@ -54,11 +62,14 @@ public class Word {
      * @param miwokTranslation is the word in the Miwok language
      *
      * @param imageResourceId image resource ID for the word
+     *
+     * @param audioResourceId is the resource ID for the audio file associated with this word
      */
-    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId){
+    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId, int audioResourceId){
         mDefaultTranslation = defaultTranslation;
         mMiwokTranslation = miwokTranslation;
         mImageResourceId  = imageResourceId;
+        mAudioResourceID = audioResourceId;
     }
 
     /**
@@ -87,6 +98,13 @@ public class Word {
      */
     public boolean hasImage() {
         return mImageResourceId != NO_IMAGE_PROVIDED;
+    }
+
+    /**
+     * Returns play sound.
+     */
+    public int getAudioResourceID() {
+        return mAudioResourceID;
     }
 
 }
